@@ -1,0 +1,46 @@
+body {
+  text-align: center;
+}
+
+.btn {
+  position: relative;
+  top: -75px;
+  left: 70px;
+  border-radius: 50%;
+  padding: 25px;
+  margin: 0;
+}
+
+.card {
+  border-radius: 50%;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+.icon {
+  font-size: 70px;
+}
+
+.icon-main {
+  font-size: 150px;
+}
+
+.last-week {
+  font-size: 12px;
+}
+
+.degree-main {
+  font-size: 75px;
+  color: green;
+}
+
+.main-card-text {
+  font-weight: 400;
+  font-size: 28px;
+}
+
+.form-group {
+  width: 75%;
+}

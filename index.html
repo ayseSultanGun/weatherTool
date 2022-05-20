@@ -10,6 +10,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src6/styles6.css" />
     <script
       src="https://kit.fontawesome.com/4861bb25e9.js"
@@ -105,8 +106,8 @@
               <br />
               <h2 class="main-card-text">today is</h2>
               <p><strong>wednesday,</strong></p>
-              <h1 class="degree-main">20°C</h1>
-              <p>now in <strong>Istanbul</strong></p>
+              <h1 class="degree-main" id="mainTemperature">20°C</h1>
+              <p>now in <strong id="city">Istanbul</strong></p>
               <br />
             </div>
           </div>
@@ -116,6 +117,9 @@
           <div class="card">
             <div class="card-body">
               <h1 class="icon-main">🌻</h1>
+              <p id="description"></p>
+              <p>humidity: <span id="humidity"></span>% 💧</p>
+              <p>wind: <span id="wind"></span> km/hr 🍃</p>
             </div>
           </div>
         </div>

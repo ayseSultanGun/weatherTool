@@ -19,7 +19,7 @@ function formatDate(timestamp) {
   ];
   let day = days[date.getDay()];
 
-  return `<strong>${day}</strong>; as of ${hours}:${minutes} it is`;
+  return `<strong>${day}</strong>; as of ${hours}:${minutes}`;
 }
 
 function displayTemperature(response) {

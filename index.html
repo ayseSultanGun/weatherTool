@@ -74,7 +74,7 @@
       <br />
       <div class="row">
         <div class="col-4">
-          <div class="card">
+          <div class="card middle-row">
             <div class="card-body">
               <br />
               <form id="search-form">
@@ -87,40 +87,39 @@
                     id="city-input"
                   />
                 </div>
-                <div class="form-group">
-                  <input type="text" value="Istanbul" class="form-control" />
-                </div>
+
                 <input
                   type="submit"
                   value="🔎"
                   placeholder="search"
                   class="btn btn-warning"
                 />
+                <h2 class="main-card-text">today</h2>
+                <p id="date"><strong></strong></p>
+                <p>in <strong id="city">Istanbul</strong></p>
               </form>
             </div>
           </div>
         </div>
 
         <div class="col-3">
-          <div class="card">
+          <div class="card middle-row">
             <div class="card-body">
               <br />
-              <h2 class="main-card-text">today is</h2>
-              <p id="date"><strong>wednesday,</strong></p>
               <h1 class="degree-main" id="mainTemperature">20°C</h1>
-              <p>now in <strong id="city">Istanbul</strong></p>
-              <br />
+
+              <p>humidity: <span id="humidity"></span>% 💧</p>
+              <p>wind: <span id="wind"></span> km/hr 🍃</p>
+              <a class="active" href="">°F</a> | <a href="">°C</a>
             </div>
           </div>
         </div>
 
         <div class="col-4">
-          <div class="card">
+          <div class="card middle-row">
             <div class="card-body">
               <img src="" alt="" class="icon-main" id="icon-main" />
               <p id="description"></p>
-              <p><span id="humidity"></span>% 💧</p>
-              <p><span id="wind"></span> km/hr 🍃</p>
             </div>
           </div>
         </div>

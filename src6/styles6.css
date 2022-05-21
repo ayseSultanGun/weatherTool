@@ -4,15 +4,21 @@ body {
 
 .btn {
   position: relative;
-  top: -75px;
-  left: 70px;
+  top: -42px;
+  left: 75px;
   border-radius: 50%;
-  padding: 25px;
+  padding: 10px;
   margin: 0;
+  background: #ec6e4c;
 }
 
 .card {
   border-radius: 50%;
+  box-shadow: 10px 5px 5px #f2f2f2;
+}
+
+.middle-row {
+  height: 250px;
 }
 
 p {
@@ -33,14 +39,29 @@ p {
 
 .degree-main {
   font-size: 75px;
-  color: green;
+  color: #ec6e4c;
 }
 
 .main-card-text {
-  font-weight: 400;
-  font-size: 28px;
+  font-weight: 500;
+  font-size: 25px;
 }
 
 .form-group {
-  width: 75%;
+  width: 70%;
+}
+
+.form-control {
+  position: relative;
+  top: 0px;
+  left: 40px;
+  border-radius: 20px;
+}
+
+#date {
+  font-size: 18px;
+}
+
+#city {
+  font-size: 20px;
 }

@@ -5,7 +5,7 @@ body {
 .btn {
   position: relative;
   top: -42px;
-  left: 75px;
+  left: 95px;
   border-radius: 50%;
   padding: 10px;
   margin: 0;
@@ -64,4 +64,14 @@ p {
 
 #city {
   font-size: 20px;
+}
+
+.middle-row .active {
+  color: #48484a;
+  cursor: default;
+  text-decoration: none;
+}
+
+.middle-row .active :hover {
+  text-decoration: none;
 }

@@ -23,7 +23,6 @@ function formatDate(timestamp) {
 }
 
 function displayTemperature(response) {
-  console.log(response.data);
   let temperatureElement = document.querySelector("#mainTemperature");
   temperatureElement.innerHTML = `${Math.round(response.data.main.temp)}°C`;
   let cityElement = document.querySelector("#city");
@@ -43,10 +42,19 @@ function displayTemperature(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
+function search(city) {
+  let apiKey = "df06795b838448a58ab71c48a5044292";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayTemperature);
+}
 
-let apiKey = "df06795b838448a58ab71c48a5044292";
-let city = "Istanbul";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
 
-console.log(apiUrl);
-axios.get(apiUrl).then(displayTemperature);
+search("Istanbul");
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);

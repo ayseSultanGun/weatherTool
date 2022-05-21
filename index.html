@@ -77,17 +77,18 @@
           <div class="card">
             <div class="card-body">
               <br />
-              <form>
+              <form id="search-form">
                 <div class="form-group">
                   <input
                     type="text"
                     placeholder="enter your city"
                     class="form-control"
                     autofocus
+                    id="city-input"
                   />
                 </div>
                 <div class="form-group">
-                  <input type="text" value="city" class="form-control" />
+                  <input type="text" value="Istanbul" class="form-control" />
                 </div>
                 <input
                   type="submit"
@@ -118,8 +119,8 @@
             <div class="card-body">
               <img src="" alt="" class="icon-main" id="icon-main" />
               <p id="description"></p>
-              <p>humidity: <span id="humidity"></span>% 💧</p>
-              <p>wind: <span id="wind"></span> km/hr 🍃</p>
+              <p><span id="humidity"></span>% 💧</p>
+              <p><span id="wind"></span> km/hr 🍃</p>
             </div>
           </div>
         </div>

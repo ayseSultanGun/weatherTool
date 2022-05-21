@@ -9,17 +9,17 @@ function formatDate(timestamp) {
     minutes = `0${minutes}`;
   }
   let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
   ];
   let day = days[date.getDay()];
 
-  return `${day}; as of ${hours}:${minutes} it is`;
+  return `<strong>${day}</strong>; as of ${hours}:${minutes} it is`;
 }
 
 function displayTemperature(response) {
@@ -36,10 +36,17 @@ function displayTemperature(response) {
   windElement.innerHTML = Math.round(response.data.wind.speed);
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
+  let iconElement = document.querySelector("#icon-main");
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 let apiKey = "df06795b838448a58ab71c48a5044292";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Istanbul&units=metric&appid=${apiKey}`;
+let city = "Istanbul";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
 console.log(apiUrl);
 axios.get(apiUrl).then(displayTemperature);

@@ -44,7 +44,7 @@ function displayForecast(response) {
   let forecastHTML = "";
 
   forecast.forEach(function (forecastDay, index) {
-    if (index < 5) {
+    if (index < 6) {
       forecastHTML =
         forecastHTML +
         `<div class="col-2">
@@ -56,7 +56,7 @@ function displayForecast(response) {
           forecastDay.weather[0].description
         }" class="icon" />
               <p>${formatDay(forecastDay.dt)}</p>
-              <h3>${Math.round(forecastDay.temp.day)}°C</h3>
+              <h3>${Math.round(forecastDay.temp.day)}°F</h3>
             </div>
           </div>
         </div>
@@ -69,16 +69,16 @@ function displayForecast(response) {
 
 function getForecast(coordinates) {
   let apiKey = "df06795b838448a58ab71c48a5044292";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=imperial&appid=${apiKey}`;
 
   axios.get(apiUrl).then(displayForecast);
 }
 
 function displayTemperature(response) {
-  celsiusTemperature = response.data.main.temp;
+  fahrenheitTemperature = response.data.main.temp;
 
   let temperatureElement = document.querySelector("#mainTemperature");
-  temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
+  temperatureElement.innerHTML = `${Math.round(fahrenheitTemperature)}°C`;
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name;
   let descriptionElement = document.querySelector("#description");
@@ -101,7 +101,7 @@ function displayTemperature(response) {
 
 function search(city) {
   let apiKey = "df06795b838448a58ab71c48a5044292";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
   axios.get(apiUrl).then(displayTemperature);
 }
 
@@ -111,32 +111,9 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
-function convert2Fahrenheit(event) {
-  event.preventDefault();
-  let fahrenheitTemperature = celsiusTemperature * 1.8 + 32;
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  let temperatureElement = document.querySelector("#mainTemperature");
-  temperatureElement.innerHTML = `${Math.round(fahrenheitTemperature)}°F`;
-}
-
-function convert2Celsius(event) {
-  event.preventDefault();
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  let temperatureElement = document.querySelector("#mainTemperature");
-  temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
-}
-
-let celsiusTemperature = null;
+let fahrenheitTemperature = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
-
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", convert2Fahrenheit);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", convert2Celsius);
 
 search("Istanbul");

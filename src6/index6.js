@@ -37,6 +37,28 @@ function formatDay(timestamp) {
   return days[day];
 }
 
+function displayArchive(response) {
+  let archive = response.data;
+  console.log(response.data);
+  let yesterdaysHigh = Math.round(response.data.hourly[14].temp);
+  let whichDay = formatDay(response.data.current.dt);
+  let archiveElement = document.querySelector("#archive");
+
+  archiveHTML =
+    `<div class="col-2">
+          <div class="card">
+            <div class="card-body">
+               <img src="https://openweathermap.org/img/wn/${archive.current.weather[0].icon}@2x.png" alt="${archive.current.weather[0].description}" class="icon" />
+              <p class="last-week">last ${whichDay}</p>
+              <h3>${yesterdaysHigh}°F</h3>
+            </div>
+          </div>
+        </div>
+        ` + archiveHTML;
+
+  archiveElement.innerHTML = archiveHTML;
+}
+
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
@@ -44,7 +66,7 @@ function displayForecast(response) {
   let forecastHTML = "";
 
   forecast.forEach(function (forecastDay, index) {
-    if (index < 6) {
+    if (index < 5) {
       forecastHTML =
         forecastHTML +
         `<div class="col-2">
@@ -74,11 +96,24 @@ function getForecast(coordinates) {
   axios.get(apiUrl).then(displayForecast);
 }
 
+function getArchives(coordinates, timestamp) {
+  let apiKey = "df06795b838448a58ab71c48a5044292";
+  let daysBefore = [1, 2, 3, 4, 5];
+
+  daysBefore.forEach(function (daysBefore) {
+    let eachDayStamp = timestamp - 86400 * daysBefore;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${coordinates.lat}&lon=${coordinates.lon}&units=imperial&dt=${eachDayStamp}&appid=${apiKey}`;
+    archiveHTML = "";
+    console.log(apiUrl);
+    axios.get(apiUrl).then(displayArchive);
+  });
+}
+
 function displayTemperature(response) {
   fahrenheitTemperature = response.data.main.temp;
 
   let temperatureElement = document.querySelector("#mainTemperature");
-  temperatureElement.innerHTML = `${Math.round(fahrenheitTemperature)}°C`;
+  temperatureElement.innerHTML = `${Math.round(fahrenheitTemperature)}°F`;
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name;
   let descriptionElement = document.querySelector("#description");
@@ -97,6 +132,7 @@ function displayTemperature(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
   getForecast(response.data.coord);
+  getArchives(response.data.coord, response.data.dt);
 }
 
 function search(city) {
@@ -112,6 +148,7 @@ function handleSubmit(event) {
 }
 
 let fahrenheitTemperature = null;
+let archiveHTML = "";
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);

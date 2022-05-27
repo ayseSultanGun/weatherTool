@@ -20,57 +20,7 @@
 
   <body>
     <div class="container">
-      <div class="row">
-        <div class="col-2">
-          <div class="card">
-            <div class="card-body">
-              <h2 class="icon">🌫</h2>
-              <p class="last-week">last friday</p>
-              <h3>12°C</h3>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-2">
-          <div class="card">
-            <div class="card-body">
-              <h2 class="icon">💨</h2>
-              <p class="last-week">last saturday</p>
-              <h3>15°C</h3>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-2">
-          <div class="card">
-            <div class="card-body">
-              <h2 class="icon">⛅</h2>
-              <p class="last-week">last sunday</p>
-              <h3>21°C</h3>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-2">
-          <div class="card">
-            <div class="card-body">
-              <h2 class="icon">☁</h2>
-              <p class="last-week">last monday</p>
-              <h3>17°C</h3>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-3">
-          <div class="card">
-            <div class="card-body">
-              <h2 class="icon">🌧</h2>
-              <p>yesterday</p>
-              <h3>13°C</h3>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="row" id="archive"></div>
       <br />
       <div class="row">
         <div class="col-4">
@@ -102,11 +52,11 @@
           </div>
         </div>
 
-        <div class="col-4">
+        <div class="col-3">
           <div class="card middle-row">
             <div class="card-body">
               <br />
-              <h1 class="degree-main" id="mainTemperature">20°C</h1>
+              <h1 class="degree-main" id="mainTemperature"></h1>
 
               <p>humidity: <span id="humidity"></span>% 💧</p>
               <p>wind: <span id="wind"></span> km/hr 🍃</p>
@@ -114,7 +64,7 @@
           </div>
         </div>
 
-        <div class="col-4">
+        <div class="col-3">
           <div class="card middle-row">
             <div class="card-body">
               <img src="" alt="" class="icon-main" id="icon-main" />

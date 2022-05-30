@@ -37,25 +37,52 @@ function formatDay(timestamp) {
   return days[day];
 }
 
-function displayArchive(response) {
-  let archive = response.data;
-  console.log(response.data);
-  let yesterdaysHigh = Math.round(response.data.hourly[14].temp);
-  let whichDay = formatDay(response.data.current.dt);
-  let archiveElement = document.querySelector("#archive");
+function getArchives(coordinates, timestamp) {
+  let apiKey = "df06795b838448a58ab71c48a5044292";
+  let daysBefore = [5, 4, 3, 2, 1];
+  let archiveValues = [];
 
-  archiveHTML =
-    `<div class="col-2">
+  daysBefore.forEach(function (day) {
+    let eachDayStamp = timestamp - 86400 * day;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${coordinates.lat}&lon=${coordinates.lon}&units=imperial&dt=${eachDayStamp}&appid=${apiKey}`;
+
+    axios.get(apiUrl).then(function (response) {
+      archiveValues.push(response);
+
+      if (archiveValues.length === daysBefore.length) {
+        displayArchive(archiveValues);
+      }
+    });
+  });
+}
+
+function displayArchive(archives) {
+  let archiveHTML = "";
+  let archiveElement = document.querySelector("#archive");
+  archives = archives.sort((a, b) =>
+    a.data.current.dt > b.data.current.dt
+      ? 1
+      : b.data.current.dt > a.data.current.dt
+      ? -1
+      : 0
+  );
+  archives.forEach(function (response) {
+    let archive = response.data;
+
+    let daysHigh = Math.round(archive.hourly[14].temp);
+    let whichDay = formatDay(archive.current.dt);
+
+    archiveHTML += `<div class="col-2">
           <div class="card">
             <div class="card-body">
                <img src="https://openweathermap.org/img/wn/${archive.current.weather[0].icon}@2x.png" alt="${archive.current.weather[0].description}" class="icon" />
               <p class="last-week">last ${whichDay}</p>
-              <h3>${yesterdaysHigh}°F</h3>
+              <h3>${daysHigh}°F</h3>
             </div>
           </div>
         </div>
-        ` + archiveHTML;
-
+        `;
+  });
   archiveElement.innerHTML = archiveHTML;
 }
 
@@ -94,19 +121,6 @@ function getForecast(coordinates) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=imperial&appid=${apiKey}`;
 
   axios.get(apiUrl).then(displayForecast);
-}
-
-function getArchives(coordinates, timestamp) {
-  let apiKey = "df06795b838448a58ab71c48a5044292";
-  let daysBefore = [1, 2, 3, 4, 5];
-
-  daysBefore.forEach(function (daysBefore) {
-    let eachDayStamp = timestamp - 86400 * daysBefore;
-    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${coordinates.lat}&lon=${coordinates.lon}&units=imperial&dt=${eachDayStamp}&appid=${apiKey}`;
-    archiveHTML = "";
-    console.log(apiUrl);
-    axios.get(apiUrl).then(displayArchive);
-  });
 }
 
 function displayTemperature(response) {
